@@ -26,8 +26,6 @@ class App extends Component {
         news: []
       },
       selectedStockInfo: null,
-      stockCardData: [],
-      stockGraphData: [],
       topBusNews: [],
       newPortfolio: null
     }
@@ -37,7 +35,7 @@ class App extends Component {
 
   //Initial Login Fetch
   handleLoginSubmit = (data) => {
-    fetch("http://localhost:3000/", {
+    fetch("https://tickr-stock-backend.herokuapp.com/", {
       method:"POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +55,7 @@ class App extends Component {
 
   //Create a New User
   createUser = (state) => {
-    fetch("http://localhost:3000/users", {
+    fetch("https://tickr-stock-backend.herokuapp.com/profile/users", {
         method:"POST",
         headers: {
             "Content-Type": "application/json",
@@ -83,7 +81,7 @@ class App extends Component {
 
   //Token Fetch when User Info Updates
   fetchProfile = () => {
-    fetch("http://localhost:3000/profile", {
+    fetch("https://tickr-stock-backend.herokuapp.com/profile", {
       method: "GET",
       headers: {
         Authorization :`Bearer ${localStorage.getItem("token")}`
@@ -125,8 +123,9 @@ class App extends Component {
         ticker: null,
         todayPrice: null,
         yesterdayPrice: null,
-        news: []
+        news: [],
       },
+      portfolioStocks: []
     })
   }
 
@@ -239,7 +238,7 @@ class App extends Component {
 
   //Delete Stock From Current Portfolio
   deleteStockFromPortfolio = (id) => {
-    fetch(`http://localhost:3000/stocks/${id}`, {
+    fetch(`https://tickr-stock-backend.herokuapp.com/stocks/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization :`Bearer ${localStorage.getItem("token")}`,
@@ -261,7 +260,7 @@ class App extends Component {
   addStockToPortfolio = () => {
     let portfolio = this.state.currentPortfolio.id
     let stockToAdd = this.state.selectedStock.ticker
-    fetch("http://localhost:3000/stocks", {
+    fetch("https://tickr-stock-backend.herokuapp.com/stocks", {
       method:"POST",
       headers: {
         Authorization :`Bearer ${localStorage.getItem("token")}`,
@@ -310,7 +309,7 @@ class App extends Component {
   //Delete a Portfolio from the database
   deletePortfolio = (id) => {
     this.checkCurrentPortfolio(id)
-    fetch("http://localhost:3000/portfolios/" + id, {
+    fetch("https://tickr-stock-backend.herokuapp.com/portfolios/" + id, {
       method: 'delete',
       headers: {
         Authorization :`Bearer ${localStorage.getItem("token")}`,
@@ -327,7 +326,7 @@ class App extends Component {
   //Add a new Portfolio
   addPortfolio = (name) => {
     let userID = this.state.currentUser.id
-    fetch("http://localhost:3000/portfolios", {
+    fetch("https://tickr-stock-backend.herokuapp.com/portfolios", {
       method:"POST",
       headers: {
         Authorization :`Bearer ${localStorage.getItem("token")}`,
