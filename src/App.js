@@ -55,7 +55,7 @@ class App extends Component {
 
   //Create a New User
   createUser = (state) => {
-    fetch("https://tickr-stock-backend.herokuapp.com/profile/users", {
+    fetch("https://tickr-stock-backend.herokuapp.com/users", {
         method:"POST",
         headers: {
             "Content-Type": "application/json",
